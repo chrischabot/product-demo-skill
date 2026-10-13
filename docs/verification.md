@@ -13,6 +13,7 @@ The following checks passed:
 | transitions.dev | The fetcher retrieved the pinned text-state recipe, retained its license, and generated the adapter's input parameters. |
 | Default starter | A complete 11.7-second film rendered and decoded. |
 | Anatomy figure | Both light and dark dial-indicator pages built from the bundled source. |
+| Failed interaction | An intentionally failed assertion returned a nonzero exit and retained the failure in `evidence.json`, including when no frames were produced. |
 | Real interaction | The recorder pressed Home, End, and Home, asserting readouts of 18 px, 10 px, and 18 px. No page errors were reported. |
 | Combined film | The resulting recording rendered inside Snapcn `ScreenRecording` between title scenes. Output: 456 frames, 30 frames per second, 1,920 × 1,080 pixels, 15.2 seconds, H.264. |
 | Artifact verification | FFmpeg decoded the complete file; ffprobe confirmed dimensions and duration. The contact sheet and full-size mechanism frame were inspected. |

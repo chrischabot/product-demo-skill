@@ -18,6 +18,7 @@ let context;
 let start;
 let video;
 let passed = false;
+let failure;
 try {
   context = await browser.newContext({viewport:{width:1600,height:900}, deviceScaleFactor:1, recordVideo:{dir, size:{width:1600,height:900}}, ...(process.env.CAPTURE_STORAGE_STATE ? {storageState:process.env.CAPTURE_STORAGE_STATE} : {})});
   const page = await context.newPage();
@@ -38,13 +39,23 @@ try {
   if (!evidence.length) throw new Error('Journey produced no evidence. Assert outcomes and call record(label).');
   if (errors.length) throw new Error(`Browser errors: ${errors.join('; ')}`);
   passed = true;
+} catch (error) {
+  failure = error;
+  errors.push(error.message);
 } finally {
   try {
     if (context) await context.close();
     if (video) await video.saveAs(join(dir,'recording.webm'));
-  } finally { await browser.close(); }
+  } catch (error) {
+    failure ??= error;
+    passed = false;
+    errors.push(`Capture finalization: ${error.message}`);
+  }
+  try { await browser.close(); }
+  catch (error) {failure ??= error; passed=false; errors.push(`Browser cleanup: ${error.message}`);}
   // Strip query and fragment; they may contain session-specific data.
   const safeUrl = new URL(url); safeUrl.search=''; safeUrl.hash=''; safeUrl.username=''; safeUrl.password='';
   writeFileSync(join(dir,'evidence.json'), JSON.stringify({url:safeUrl.href,passed,recording:'recording.webm',viewport:{width:1600,height:900},seconds:start?(Date.now()-start)/1000:0,steps:evidence,errors},null,2)+'\n');
 }
+if (failure) throw failure;
 console.log(`Captured and verified ${dir}/recording.webm`);
