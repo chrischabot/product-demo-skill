@@ -1,0 +1,11 @@
+import {bundle} from '@remotion/bundler';
+import {selectComposition, renderMedia} from '@remotion/renderer';
+import {mkdirSync, writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+mkdirSync('out', {recursive: true});
+const serveUrl = await bundle({entryPoint: resolve('src/index.tsx')});
+const options = {serveUrl, id: 'ProductDemo', ...(process.env.CHROME_PATH ? {browserExecutable: process.env.CHROME_PATH} : {})};
+const composition = await selectComposition(options);
+await renderMedia({serveUrl, composition, codec: 'h264', pixelFormat: 'yuv420p', crf: 18, outputLocation: resolve('out/product-demo.mp4'), concurrency: 2, ...(process.env.CHROME_PATH ? {browserExecutable: process.env.CHROME_PATH} : {})});
+writeFileSync('out/render.json', JSON.stringify({id: composition.id, width: composition.width, height: composition.height, fps: composition.fps, frames: composition.durationInFrames, duration: composition.durationInFrames / composition.fps}, null, 2) + '\n');
+console.log(`Rendered out/product-demo.mp4 (${composition.durationInFrames / composition.fps}s)`);

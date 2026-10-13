@@ -1,0 +1,22 @@
+{
+  "anatomy": {
+    "repo": "wheresryan22/anatomy",
+    "sha": "e6600ffc4e8e6620eeb45bf49bcdbd5e4b84163f"
+  },
+  "snapcn": {
+    "repo": "shadcn-labs/snapcn",
+    "sha": "afce9f0aa8c9d464409efd1e4d4f227ca4809c04"
+  },
+  "transitions": {
+    "repo": "Jakubantalik/transitions.dev",
+    "sha": "a0c6e7bbf603a0a46588e37c6c6a4d0af3290d52"
+  },
+  "hyperframes": {
+    "repo": "heygen-com/hyperframes",
+    "sha": "e8eb358fe21d6f1a611e04f8df27ca366b337ce9"
+  },
+  "superpowers": {
+    "repo": "101-skills/superpowers",
+    "sha": "becc25649700d5457772a00e5143e28ccf9e5afa"
+  }
+}

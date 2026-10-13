@@ -1,0 +1,28 @@
+{
+  "url": "http://127.0.0.1:4319/dial-indicator-light.html",
+  "passed": true,
+  "recording": "recording.webm",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "seconds": 9.11,
+  "steps": [
+    {
+      "label": "Home selects the 18 px gauge block",
+      "seconds": 0.049,
+      "image": "step-1.png"
+    },
+    {
+      "label": "End moves the carriage and needle to the 10 px gauge block",
+      "seconds": 3.162,
+      "image": "step-2.png"
+    },
+    {
+      "label": "Home returns the gauge to 18 px",
+      "seconds": 6.294,
+      "image": "step-3.png"
+    }
+  ],
+  "errors": []
+}

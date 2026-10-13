@@ -1,0 +1,9 @@
+node_modules/
+dist/
+out/
+.cache/
+.DS_Store
+*.webm
+*.mp4
+skills/anatomy/examples/**/*.html
+!docs/assets/*.mp4

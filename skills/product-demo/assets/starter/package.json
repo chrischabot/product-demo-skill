@@ -1,0 +1,30 @@
+{
+  "name": "product-demo-video",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "render": "node scripts/render.mjs",
+    "verify": "node scripts/verify.mjs",
+    "capture": "node scripts/capture.mjs",
+    "transition": "node scripts/fetch-transition.mjs"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.2.8",
+    "@remotion/bundler": "4.0.532",
+    "@remotion/cli": "4.0.532",
+    "@remotion/renderer": "4.0.532",
+    "@remotion/transitions": "4.0.532",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.532"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "playwright": "1.58.2",
+    "typescript": "5.9.3"
+  }
+}

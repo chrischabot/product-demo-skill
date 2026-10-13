@@ -1,0 +1,6 @@
+interface:
+  display_name: "Product demo"
+  short_description: "Render product demos, change reviews and explainers"
+  default_prompt: "Use $product-demo to create a video showing this project's most useful workflow."
+policy:
+  allow_implicit_invocation: true

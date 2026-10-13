@@ -1,0 +1,14 @@
+import {execFileSync} from 'node:child_process';
+import {readFileSync, writeFileSync} from 'node:fs';
+const file = 'out/product-demo.mp4';
+const expected = JSON.parse(readFileSync('out/render.json', 'utf8'));
+const probe = JSON.parse(execFileSync('ffprobe', ['-v','error','-show_streams','-show_format','-of','json',file], {encoding:'utf8'}));
+const stream = probe.streams.find(s => s.codec_type === 'video');
+if (!stream || stream.width !== expected.width || stream.height !== expected.height || stream.codec_name !== 'h264') throw new Error('Wrong video dimensions or codec');
+if (Math.abs(Number(probe.format.duration) - expected.duration) > 2 / expected.fps) throw new Error('Unexpected video duration');
+execFileSync('ffmpeg', ['-v','error','-i',file,'-f','null','-'], {stdio:'pipe'});
+const step = expected.duration / 9;
+execFileSync('ffmpeg', ['-v','error','-y','-i',file,'-vf',`fps=1/${step}:start_time=${step / 2},scale=640:-1,tile=3x3`,'-frames:v','1','out/contact-sheet.jpg']);
+execFileSync('ffmpeg', ['-v','error','-y','-ss',String(expected.duration / 2),'-i',file,'-frames:v','1','out/poster.jpg']);
+writeFileSync('out/verification.json', JSON.stringify({decoded:true, ...expected, audio:probe.streams.some(s=>s.codec_type === 'audio'), visualReview:'pending: open the contact sheet and watch the video'}, null, 2)+'\n');
+console.log('Decode, dimensions and duration passed. Inspect out/contact-sheet.jpg and playback; automated checks do not establish visual correctness.');
