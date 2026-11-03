@@ -109,6 +109,10 @@ Open the generated `dial-indicator-light.html` beside that script, focus the fig
 
 There is no root build or test command, because the toolchain lives in the scaffolded project, whose manifest and lockfile are in `skills/product-demo/assets/starter`. To check a change, follow [Verification](docs/verification.md). Its recorded run, on macOS with Node.js 26.8.2, establishes the local rendering path from a fresh scaffold to a fully decoded film, not every optional provider or every Anatomy figure. Anatomy's own checks are described in [its verification reference](skills/anatomy/references/verify.md).
 
+## Project background
+
+- [Product demo project overview](https://chabot.dev/projects/#product-demo-skill) on Chris Chabot’s site.
+
 ## Credits and license
 
 The original skill, scripts, frame adapter and documentation are [MIT licensed](LICENSE). Everything else keeps its own terms, and [Third-party notices](THIRD_PARTY_NOTICES.md) and [sources.json](sources.json) record the attribution, adaptations and exact revisions.
